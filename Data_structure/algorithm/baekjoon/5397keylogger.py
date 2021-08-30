@@ -1,3 +1,5 @@
+##insert사용시 시간복잡도가 O(N)이여서 시간초과가 뜨는듯하다
+
 inp=int(input())
 for i in range(inp):
     data=input()

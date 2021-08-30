@@ -31,5 +31,5 @@ a="hel"
 if a*2==str:
   print('right')
 print(str[0:3])
-
+##정석답에선 열과 행을 분리해서 행 구한 후 열구하는식으로
 

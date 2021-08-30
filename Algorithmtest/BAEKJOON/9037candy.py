@@ -1,12 +1,13 @@
 times=int(input())
-num=int(input())
+
 
 for i in range(times):
+    num=int(input())
     candy=list(map(int,input().split(" ")))
     for k in range(num):
         if candy[k]%2==1:
             candy[k]+=1
-    print(candy)
+    
     change=[0 for i in range(num)]
     
     count=0
