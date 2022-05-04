@@ -1,0 +1,11 @@
+<h1>당신이 입력한 텍스트는 {{total}}로 구성되어있습니다.</h1>
+
+<a href="{% url 'home'%}">다시하기</a>
+<br> <!--한줄공백-->
+<h2>입력한 텍스트: </h2>
+{{full}}  <!--full의 value값 출력 views.py에서받아옴-->
+<h2>단어 카운트: </h2>
+{%for a,b in dictionary%}
+{{a}}:{{b}}
+<br>
+{%endfor%}

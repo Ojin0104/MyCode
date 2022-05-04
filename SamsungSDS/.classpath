@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry excluding="위상정렬/|플로이드와샬/" kind="src" path="src"/>
+	<classpathentry kind="src" path="src/위상정렬"/>
+	<classpathentry kind="src" path="src/플로이드와샬"/>
+	<classpathentry kind="output" path="out/production/SamsungSDS"/>
+</classpath>
