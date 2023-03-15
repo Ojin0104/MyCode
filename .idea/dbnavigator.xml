@@ -5,12 +5,65 @@
     <value-preview-text-wrapping value="true" />
     <value-preview-pinned value="false" />
   </component>
+<<<<<<< HEAD
   <component name="DBNavigator.Project.DatabaseEditorStateManager">
     <last-used-providers />
+=======
+  <component name="DBNavigator.Project.DataExportManager">
+    <export-instructions>
+      <create-header value="true" />
+      <friendly-headers value="false" />
+      <quote-values-containing-separator value="true" />
+      <quote-all-values value="false" />
+      <value-separator value="" />
+      <file-name value="" />
+      <file-location value="" />
+      <scope value="GLOBAL" />
+      <destination value="FILE" />
+      <format value="EXCEL" />
+      <charset value="UTF-8" />
+    </export-instructions>
+  </component>
+  <component name="DBNavigator.Project.DatabaseBrowserManager">
+    <autoscroll-to-editor value="false" />
+    <autoscroll-from-editor value="true" />
+    <show-object-properties value="true" />
+    <loaded-nodes />
+>>>>>>> 3c2d1f8f256bfb8f2a64a03efa08f8b8ad75fb16
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
     <open-files />
   </component>
+<<<<<<< HEAD
+=======
+  <component name="DBNavigator.Project.EditorStateManager">
+    <last-used-providers />
+  </component>
+  <component name="DBNavigator.Project.ExecutionManager">
+    <retain-sticky-names value="false" />
+  </component>
+  <component name="DBNavigator.Project.MethodExecutionManager">
+    <method-browser />
+    <execution-history>
+      <group-entries value="true" />
+      <execution-inputs />
+    </execution-history>
+    <argument-values-cache />
+  </component>
+  <component name="DBNavigator.Project.ObjectDependencyManager">
+    <last-used-dependency-type value="INCOMING" />
+  </component>
+  <component name="DBNavigator.Project.ObjectQuickFilterManager">
+    <last-used-operator value="EQUAL" />
+    <filters />
+  </component>
+  <component name="DBNavigator.Project.ParserDiagnosticsManager">
+    <diagnostics-history />
+  </component>
+  <component name="DBNavigator.Project.ScriptExecutionManager" clear-outputs="true">
+    <recently-used-interfaces />
+  </component>
+>>>>>>> 3c2d1f8f256bfb8f2a64a03efa08f8b8ad75fb16
   <component name="DBNavigator.Project.Settings">
     <connections />
     <browser-settings>
@@ -53,7 +106,10 @@
         <object-type name="FUNCTION" sorting-type="NAME" />
         <object-type name="PROCEDURE" sorting-type="NAME" />
         <object-type name="ARGUMENT" sorting-type="POSITION" />
+<<<<<<< HEAD
         <object-type name="TYPE ATTRIBUTE" sorting-type="POSITION" />
+=======
+>>>>>>> 3c2d1f8f256bfb8f2a64a03efa08f8b8ad75fb16
       </sorting>
       <default-editors>
         <object-type name="VIEW" editor-type="SELECTION" />
@@ -100,11 +156,19 @@
         <nulls-first value="true" />
         <max-sorting-columns value="4" />
       </sorting>
+<<<<<<< HEAD
       <audit-columns>
         <column-names value="" />
         <visible value="true" />
         <editable value="false" />
       </audit-columns>
+=======
+      <tracking-columns>
+        <columnNames value="" />
+        <visible value="true" />
+        <editable value="false" />
+      </tracking-columns>
+>>>>>>> 3c2d1f8f256bfb8f2a64a03efa08f8b8ad75fb16
     </dataset-grid-settings>
     <dataset-editor-settings>
       <text-editor-popup>
@@ -411,4 +475,10 @@
       </environment>
     </general-settings>
   </component>
+<<<<<<< HEAD
+=======
+  <component name="DBNavigator.Project.StatementExecutionManager">
+    <execution-variables />
+  </component>
+>>>>>>> 3c2d1f8f256bfb8f2a64a03efa08f8b8ad75fb16
 </project>
