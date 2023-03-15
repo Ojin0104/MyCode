@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class baek14891 {
+public class baek14891톱니바퀴 {
     static int[][] map=new int[5][8];
     static int[] map_index=new int[5];
     static int[] check=new int[5];
