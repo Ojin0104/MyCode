@@ -5,6 +5,10 @@
     <value-preview-text-wrapping value="true" />
     <value-preview-pinned value="false" />
   </component>
+<<<<<<< HEAD
+  <component name="DBNavigator.Project.DatabaseEditorStateManager">
+    <last-used-providers />
+=======
   <component name="DBNavigator.Project.DataExportManager">
     <export-instructions>
       <create-header value="true" />
@@ -25,10 +29,13 @@
     <autoscroll-from-editor value="true" />
     <show-object-properties value="true" />
     <loaded-nodes />
+>>>>>>> 3c2d1f8f256bfb8f2a64a03efa08f8b8ad75fb16
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
     <open-files />
   </component>
+<<<<<<< HEAD
+=======
   <component name="DBNavigator.Project.EditorStateManager">
     <last-used-providers />
   </component>
@@ -56,6 +63,7 @@
   <component name="DBNavigator.Project.ScriptExecutionManager" clear-outputs="true">
     <recently-used-interfaces />
   </component>
+>>>>>>> 3c2d1f8f256bfb8f2a64a03efa08f8b8ad75fb16
   <component name="DBNavigator.Project.Settings">
     <connections />
     <browser-settings>
@@ -98,6 +106,10 @@
         <object-type name="FUNCTION" sorting-type="NAME" />
         <object-type name="PROCEDURE" sorting-type="NAME" />
         <object-type name="ARGUMENT" sorting-type="POSITION" />
+<<<<<<< HEAD
+        <object-type name="TYPE ATTRIBUTE" sorting-type="POSITION" />
+=======
+>>>>>>> 3c2d1f8f256bfb8f2a64a03efa08f8b8ad75fb16
       </sorting>
       <default-editors>
         <object-type name="VIEW" editor-type="SELECTION" />
@@ -144,11 +156,19 @@
         <nulls-first value="true" />
         <max-sorting-columns value="4" />
       </sorting>
+<<<<<<< HEAD
+      <audit-columns>
+        <column-names value="" />
+        <visible value="true" />
+        <editable value="false" />
+      </audit-columns>
+=======
       <tracking-columns>
         <columnNames value="" />
         <visible value="true" />
         <editable value="false" />
       </tracking-columns>
+>>>>>>> 3c2d1f8f256bfb8f2a64a03efa08f8b8ad75fb16
     </dataset-grid-settings>
     <dataset-editor-settings>
       <text-editor-popup>
@@ -455,7 +475,10 @@
       </environment>
     </general-settings>
   </component>
+<<<<<<< HEAD
+=======
   <component name="DBNavigator.Project.StatementExecutionManager">
     <execution-variables />
   </component>
+>>>>>>> 3c2d1f8f256bfb8f2a64a03efa08f8b8ad75fb16
 </project>

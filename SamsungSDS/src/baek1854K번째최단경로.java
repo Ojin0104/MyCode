@@ -67,9 +67,9 @@ public class baek1854K번째최단경로 {//다익스트라구조에서  배열�
        pq[n].add(0);
        while(!queue.isEmpty()){
            edge now=queue.poll();
-           if(now.v>pq[now.s].peek()){//선택한 간선의 가중치가 도착지점까지의 경로가중치합보다 크면 이미 실행된것 이므로 띄어넘음
-               continue;//->직선거리보다 돌아서 간것이 짧다는 것은 이미 구한값이라서 똑같은거 해줄필요없음
-           }
+//           if(now.v>pq[now.s].peek()){//선택한 간선의 가중치가 도착지점까지의 경로가중치합보다 크면 이미 실행된것 이므로 띄어넘음
+//               continue;//->직선거리보다 돌아서 간것이 짧다는 것은 이미 구한값이라서 똑같은거 해줄필요없음
+//           }
           // System.out.println(now.v);
            for(edge next:tree[now.s]){
                if(pq[next.s].size()<k){//그냥넣어주면됨
