@@ -44,21 +44,20 @@ public class baek16236아기상어 {
                 Point now = que.poll();
 
                 if(now.dist>max)break;
-                if(check[now.x][now.y])continue;
 
-                check[now.x][now.y]=true;
-
-                if(map[now.x][now.y]!=0&&map[now.x][now.y]<babysize){//먹방
-
-                                caneat.add(now);
-                                max=now.dist;
-                                continue;
-                        }
                 for (int i = 0; i < 4; i++) {
                     int n_x = now.x + dx[i];
                     int n_y = now.y + dy[i];
 
                     if (mapcheck(n_x, n_y, map,check)) {//범위&&물고기크기 체크
+
+                        check[n_x][n_y]=true;
+                        if(map[n_x][n_y]!=0&&map[n_x][n_y]<babysize){//먹방
+                            caneat.add(new Point(n_x,n_y,now.dist+1));
+                            max=now.dist;
+                            continue;
+                        }
+
                         que.add(new Point(n_x,n_y,now.dist+1));
                     }
                 }
