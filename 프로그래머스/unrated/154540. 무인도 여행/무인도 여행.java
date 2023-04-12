@@ -1,68 +1,73 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+
 class Solution {
-    static ArrayList<Integer> island_bob;
-    static char[][] copy_maps;
-    static int[] dx={0,-1,0,1};
-    static int[] dy={1,0,-1,0};
+
+    static int[] dI = {1,0,-1,0};
+    static int[] dJ = {0,-1,0,1};
+    static ArrayList<Integer> arr = new ArrayList<>();
+
     public int[] solution(String[] maps) {
-        island_bob=new ArrayList<>();
-        copy_maps=new char[maps.length][maps[0].length()];
-        
-         for(int i=0;i<maps.length;i++){
-            for(int j=0;j<maps[0].length();j++){
-                copy_maps[i][j]=maps[i].charAt(j);
-            }
-         }
-        
-        
-        for(int i=0;i<maps.length;i++){
-            for(int j=0;j<maps[0].length();j++){
-                //1~9사이 자연수일경우
-                if(copy_maps[i][j]!='X'&&copy_maps[i][j]!='0'){
-                    island_bob.add(0);
-                    //System.out.println(copy_maps[i][j]);
-                    bfs(i,j);
+
+        int[][] map = new int[maps.length+2][maps[0].length()+2];
+        Boolean[][] visit = new Boolean[maps.length+2][maps[0].length()+2];
+        for(int[] temp: map) {
+            Arrays.fill(temp, 0);
+        }
+        for(Boolean[] temp: visit) {
+            Arrays.fill(temp, true);
+        }
+
+        Boolean flag =false;
+
+        for(int i = 1; i <= maps.length; i++) {
+            for(int j = 1; j <= maps[0].length(); j++) {
+                if(maps[i-1].charAt(j-1) == 'X') {
+                    map[i][j] = 0;
                 }
-                
+                else {
+                    map[i][j] = maps[i-1].charAt(j-1) - '0';
+                    visit[i][j] = false;
+                    flag = true;
+                }
             }
         }
-        System.out.println(island_bob.size());
-        int[] answer=new int[island_bob.size()];
-        Collections.sort(island_bob);
-                         
-        for(int i=0;i<island_bob.size();i++){
-            answer[i]=island_bob.get(i);
+
+        if(!flag) {
+            return new int[] {-1};
         }
-        
-        if(island_bob.size()==0)
-            answer=new int[]{-1};
-        return answer;
+
+        for(int i = 1; i <= maps.length; i++) {
+            for(int j = 1; j <= maps[0].length(); j++) {
+                if(map[i][j] > 0 && !visit[i][j]) {
+                    DFS(visit, map, i, j,0);
+                }
+            }
+        }
+
+
+
+        int ans[] = new int[arr.size()];
+        for(int i = 0; i < arr.size(); i++) {
+            ans[i] = arr.get(i);
+        }
+        Arrays.sort(ans);
+        return ans;
     }
-    static void bfs(int i,int j){
-        Queue<int[]> que=new LinkedList<>();
-        que.add(new int[]{i,j});
-        
-        int answer=Character.getNumericValue(copy_maps[i][j]);
-         copy_maps[i][j]='0';
-        while(!que.isEmpty()){
-            int[] now=que.poll();
-            for(int k=0;k<4;k++){
-                int nx=now[0]+dx[k];
-                int ny=now[1]+dy[k];
-                
-                if(nx<0||ny<0||nx>=copy_maps.length||ny>=copy_maps[0].length)continue;
-                
-                if(copy_maps[nx][ny]=='0'||copy_maps[nx][ny]=='X')continue;
-              //  System.out.println(answer);
-                //System.out.println(copy_maps[nx][ny]);
-                answer+=Character.getNumericValue(copy_maps[nx][ny]);
-                copy_maps[nx][ny]='0';
-                que.add(new int[]{nx,ny});
-                
-            }
-            
+
+    int DFS(Boolean[][] visit, int[][] map, int i, int j, int depth) {
+        if(visit[i][j] || map[i][j] == 0) {
+            return 0;
         }
-        island_bob.set(island_bob.size()-1,answer);
-        
+
+        visit[i][j] = true;
+        int ans = map[i][j];
+        for(int k = 0; k < 4; k++) {
+            ans += DFS(visit,map,i+dI[k],j+dJ[k], depth+1);
+        }
+        if(depth == 0) {
+        arr.add(ans);
+        }
+        return ans;
     }
 }
