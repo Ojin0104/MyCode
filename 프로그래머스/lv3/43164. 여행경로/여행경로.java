@@ -1,36 +1,59 @@
-import java.util.*;
+import java.util.HashMap;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 
 class Solution {
-    boolean[] visited;
-    ArrayList<String> allRoute; 
-    
+    static int n=0;
+    HashMap<String,Integer> map = new HashMap<>();
+    String[][] tickets;
+
+    int[] c;
+    String[] answer = {};
     public String[] solution(String[][] tickets) {
-        String[] answer = {};
-        int cnt = 0;
-        visited = new boolean[tickets.length];
-        allRoute = new ArrayList<>();
-        
-        dfs("ICN", "ICN", tickets, cnt);
-        
-        Collections.sort(allRoute);
-        answer = allRoute.get(0).split(" ");
-        
+        this.tickets=tickets;
+
+        n=tickets.length;
+        c=new int[n];
+
+        Arrays.sort(tickets,(o1, o2) -> {
+            if(o1[0].equals(o2[0])){
+                return o1[1].compareTo(o2[1]);
+            }
+            else{
+                return o1[0].compareTo(o2[0]);
+            }
+        });
+
+
+
+        arr.add("ICN");
+        DFS("ICN",0);
+
         return answer;
     }
-    
-    public void dfs(String start, String route, String[][] tickets, int cnt){
-        if(cnt == tickets.length){
-            allRoute.add(route);
+    ArrayList<String> arr = new ArrayList<>();
+
+    public void DFS(String cur, int level){
+
+        if(answer.length>0) return;
+        if(level==n){
+            answer = new String[arr.size()];
+
+            for(int i=0; i<arr.size(); i++)
+                answer[i]=arr.get(i);
             return;
         }
-        
         for(int i=0; i<tickets.length; i++){
-            if(start.equals(tickets[i][0]) && !visited[i]){
-                visited[i] = true;
-                dfs(tickets[i][1], route+" "+tickets[i][1], tickets, cnt+1);
-                visited[i] = false;
+            if(tickets[i][0].equals(cur) && c[i]==0){
+                arr.add(tickets[i][1]);
+                c[i]=1;
+                DFS(tickets[i][1],level+1);
+                c[i]=0;
+                arr.remove(arr.lastIndexOf(tickets[i][1]));
             }
         }
+
     }
-    
 }
