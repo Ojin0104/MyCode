@@ -33,11 +33,11 @@ public class Main {
             }
             if(zero==0)break;
         }
-        
-        for(int i=sb.length()-1;i>=0;i--){
-            if(sb.charAt(i)=='2')sb.deleteCharAt(i);
+        StringBuilder sbb=new StringBuilder();
+        for(int i=0;i<sb.length();i++){
+            if(sb.charAt(i)!='2')sbb.append(sb.charAt(i));
         }
 
-        System.out.println(sb);
+        System.out.println(sbb);
             }
 }
