@@ -20,13 +20,7 @@ public class Main {
                 return o1[0]-o2[0];
             }
         });
-        PriorityQueue<int[]>  nowClass=new PriorityQueue<>(new Comparator<>(){
-
-            @Override
-            public int compare(int[] o1, int[] o2) {
-                return o1[1]-o2[1];
-            }
-        });
+        PriorityQueue<Integer>  nowClass=new PriorityQueue<>();
 
         for(int i=0;i<N;i++){
             st=new StringTokenizer(br.readLine());
@@ -41,13 +35,13 @@ public class Main {
 
 
             while(!nowClass.isEmpty()){
-                if(nowClass.peek()[1]<=now[0]){
+                if(nowClass.peek()<=now[0]){
                     nowClass.poll();
                 }else{
                     break;
                 }
             }
-            nowClass.add(now);
+            nowClass.add(now[1]);
             max=Math.max(max,nowClass.size());
         }
         System.out.println(max);
