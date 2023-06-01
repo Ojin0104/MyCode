@@ -5,7 +5,6 @@ import java.util.*;
 
 public class Main {
     static String[] map;
-    static boolean[][] robotCheck;
     public static void main(String[] args) throws IOException {
         BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st=new StringTokenizer(br.readLine());
@@ -15,7 +14,6 @@ public class Main {
 
         map=new String[N];
         int[] start=new int[2];
-        robotCheck=new boolean[N][N];
         for(int i=0;i<N;i++){
             map[i]=br.readLine();
             for(int j=0;j<N;j++){
@@ -35,7 +33,7 @@ public class Main {
                 System.out.println(-1);
                 return;
             }
-            
+
             answer+=size;
         }
         System.out.println(answer);
@@ -45,10 +43,12 @@ public class Main {
         Queue<int[]> que=new LinkedList<>();
         int[] dx={1,0,-1,0};
         int[] dy={0,1,0,-1};
+        boolean[][] check=new boolean[N][N];
         for(int[] robot:arr){
            que.add(new int[]{robot[0],robot[1],0});
+           check[robot[0]][robot[1]]=true;
         }
-        boolean[][] check=new boolean[N][N];
+
         while(!que.isEmpty()){
             int[] now=que.poll();
 
@@ -58,9 +58,8 @@ public class Main {
                 if(next_x<0||next_y<0||next_x>=N||next_y>=N||check[next_x][next_y])continue;
                 if(map[next_x].charAt(next_y)=='1')continue;
 
-                if(map[next_x].charAt(next_y)=='K'&&!robotCheck[next_x][next_y]){
+                if(map[next_x].charAt(next_y)=='K'){
                     arr.add(new int[]{next_x,next_y});
-                    robotCheck[next_x][next_y]=true;
                     return now[2]+1;
                 }
                 que.add(new int[]{next_x,next_y,now[2]+1});
