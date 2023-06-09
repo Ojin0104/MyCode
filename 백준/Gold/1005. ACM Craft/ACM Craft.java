@@ -59,9 +59,9 @@ public class Main {
         while(!que.isEmpty()){
             int[] now=que.poll();
 
-            int time=now[1]+value[now[0]];
-            sum[now[0]]=Math.max(time,sum[now[0]]);
-          //  sb.append(now[0]+" "+sum[now[0]]+"\n");
+            
+            sum[now[0]]=now[1]+value[now[0]];
+          
             if(now[0]==W){
                 sb.append(sum[now[0]]+"\n");
                 return;
