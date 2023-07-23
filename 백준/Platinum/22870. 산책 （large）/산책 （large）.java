@@ -78,7 +78,7 @@ public class Main {
 
     }
     static void dikstra(int start){
-        PriorityQueue<int[]> pq=new PriorityQueue<>((a,b)->(a[1]==b[1])?a[0]-b[0]:a[1]-b[1]);
+        PriorityQueue<int[]> pq=new PriorityQueue<>((a,b)->a[1]-b[1]);
         pq.add(new int[]{start,0});
         dists[start]=0;
 
