@@ -59,20 +59,22 @@ public class Main {
 			if(map[row][col]==shark.index) {//현재 다른상어가 이위치로 이동하지 않았다면 0으로 초기화해줌(떠날자리)
 				map[row][col]=0;
 			}
-			for (int times = 0; times < shark.speed; times++) {// 한칸씩 이동하며 상어 이동방향을 설정한다.
-				int next_r = row + dr[shark.dir];
-				int next_c = col + dc[shark.dir];
-				if (next_r <= 0 || next_c <= 0 || next_r > R || next_c > C) {// 방향전환후 한칸 이동
-					shark.dir = swapDir(shark.dir);
-					next_r += dr[shark.dir] * 2;
-					next_c += dc[shark.dir] * 2;
-				}
-				row = next_r;
-				col = next_c;
-			}
-			shark.row = row;
-			shark.col = col;
-
+//			for (int times = 0; times < shark.speed; times++) {// 한칸씩 이동하며 상어 이동방향을 설정한다.
+//				int next_r = row + dr[shark.dir];
+//				int next_c = col + dc[shark.dir];
+//				if (next_r <= 0 || next_c <= 0 || next_r > R || next_c > C) {// 방향전환후 한칸 이동
+//					shark.dir = swapDir(shark.dir);
+//					next_r += dr[shark.dir] * 2;
+//					next_c += dc[shark.dir] * 2;
+//				}
+//				row = next_r;
+//				col = next_c;
+//			}
+			SpeedMove(shark);
+//			shark.row = row;
+//			shark.col = col;
+			row=shark.row;
+			col=shark.col;
 			if (map[row][col] != 0) {// 상어가 이미 존재하는 경우
 				if (map[row][col] < shark.index) {// 이미 움직인 상어인경우
 					fightShark(shark, sharks[map[row][col]], map);
@@ -83,6 +85,35 @@ public class Main {
 				map[row][col] = shark.index;
 			}
 		}
+	}
+	static void SpeedMove(Shark shark) {
+		int row=shark.row;
+		int col = shark.col;
+		
+		row+=shark.speed*dr[shark.dir];
+		col+=shark.speed*dc[shark.dir];
+		while(row<1||row>R||col<1||col>C) {
+		if(row>R) {
+			row=R-(row-R);
+			shark.dir=swapDir(shark.dir);
+		}
+		if(col>C) {
+			col=C-(col-C);
+			shark.dir=swapDir(shark.dir);
+		}
+		if(row<=0) {
+			row=row*-1+2;
+			shark.dir=swapDir(shark.dir);
+		}
+		if(col<=0) {
+			col=col*-1+2;
+			shark.dir=swapDir(shark.dir);
+		}
+		}
+		
+		shark.row=row;
+		shark.col=col;
+		
 	}
 
 	// 큰사이즈 상어가 작은애 잡아먹는다.
