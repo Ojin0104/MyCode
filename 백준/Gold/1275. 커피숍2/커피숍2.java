@@ -40,14 +40,16 @@ public class Main {
 			tree[node]=change;
 			return;
 		}
-		
+		if(left<=target&&target<=right) {
+			int mid=(left+right)/2;
+			update(node*2,left,mid,target,change);
+			update(node*2+1,mid+1,right,target,change);
+			tree[node]=tree[node*2]+tree[node*2+1];
+		}
 		if(left>target||right<target) {
 			return;
 		}
-		int mid=(left+right)/2;
-		update(node*2,left,mid,target,change);
-		update(node*2+1,mid+1,right,target,change);
-		tree[node]=tree[node*2]+tree[node*2+1];
+		
 	}
 	static long sum(int node,int left,int right,int queryLeft,int queryRight) {
 		
