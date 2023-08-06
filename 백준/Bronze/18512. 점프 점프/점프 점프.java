@@ -17,12 +17,12 @@ public class Main {
         int B = Integer.parseInt(stringTokenizer.nextToken());
         int X = Integer.parseInt(stringTokenizer.nextToken());
         int Y = Integer.parseInt(stringTokenizer.nextToken());
-        
+
         int answer = findIndex(A,B,X,Y);
         System.out.println(answer);
 
     }
-    
+
     static int findIndex(int A,int B, int X,int Y){
         int div =B;
         if(A<B)div=A;
@@ -39,8 +39,8 @@ public class Main {
             check.put(Y,true);
             X+=A;
             Y+=B;
-            if(X>10000&&Y>10000)return -1;
-
+            
+            if(X>=10005&&Y>=10005)return -1;
         }
     }
 }
