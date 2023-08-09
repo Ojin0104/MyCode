@@ -10,11 +10,12 @@ import java.util.PriorityQueue;
  *
  */
 public class Main {
-	static StringBuilder sb = new StringBuilder();
+	
 
 	public static void main(String[] args) throws NumberFormatException, IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		int query = Integer.parseInt(br.readLine());
+        StringBuilder sb = new StringBuilder();
 		// 절대값 오름차순으로 설정
 		PriorityQueue<Integer> pq = new PriorityQueue<>((a, b) -> {
 			if (Math.abs(a) == Math.abs(b)) {//절대값같을시엔 기존 수 오름차순
@@ -22,7 +23,7 @@ public class Main {
 			}
 			return Math.abs(a) - Math.abs(b);
 		});
-
+        
 		for (int index = 0; index < query; index++) {// 쿼리문 처리
 			int num = Integer.parseInt(br.readLine());
 			if (num == 0) {
