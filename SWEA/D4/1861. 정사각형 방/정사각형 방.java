@@ -7,7 +7,8 @@ import java.util.StringTokenizer;
 /**\
  * dfs+dp로 풀수있다.
  * 총 칸수는 1000*1000 이고 이동경우는 +1클떄이다.
- *
+ * dfs로 처음접근할때 갈수있는 만큼 이동을 한다. 
+ * 이동하고 재귀로 돌아올때 dp에값을 저장해준다.
  * dp를이용해 이미 계산되어있는 경로는 추가적으로 계산하지 않는다.
  * @author 영진
  *
@@ -71,7 +72,8 @@ public class Solution {
 				dp[row][col]=Math.max(dp[row][col],dp[next_r][next_c]+1);
 				
 			}
-			
+			//각수에 대해 +1할수 있는 수는 단 하나밖에없으므로 해당 수를 탐색했다면 for문 break해준다.
+			break;
 		}
 		if(dp[row][col]>maxNum) {//더큰 범위가진 방이라면
 			maxNum=dp[row][col];
