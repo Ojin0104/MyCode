@@ -1,50 +1,71 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.ArrayDeque;
+import java.util.HashMap;
 import java.util.StringTokenizer;
 
+/**
+ * 
+ * @author 영진 
+ * 1.큐에 각초마다 세가지경우를 넣어준다. 
+ * 
+ */
 public class Main {
-    public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st = new StringTokenizer(br.readLine());
 
-        BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer stringTokenizer = new StringTokenizer(br.readLine());
+		int subin = Integer.parseInt(st.nextToken());
+		int sister = Integer.parseInt(st.nextToken());
+        if(sister<subin){
+            System.out.println(subin-sister);
+        }else{
+		int answer = bfs(subin, sister);
 
-        int N=Integer.parseInt(stringTokenizer.nextToken());
-        int M=Integer.parseInt(stringTokenizer.nextToken());
-
-        int answer=bfs(N,M);
-        System.out.println(answer);
-    }
-    static int bfs(int N,int M){
-        Queue<int[]> queue = new LinkedList<>();
-        queue.add(new int[]{N,0});
-        boolean check[]=new boolean[200000];
-        while(!queue.isEmpty()){
-            int[] now=queue.poll();
-            if(now[0]==M)return now[1];
-            int next=now[0]+1;
-            if(next<200000&&!check[next]){
-                check[next]=true;
-                queue.add(new int[]{next,now[1]+1});
-            }
-             if(now[0]==0)continue;
-            next=now[0]-1;
-            if(next<200000&&!check[next]){
-                check[next]=true;
-                queue.add(new int[]{next,now[1]+1});
-            }
-            next=now[0]*2;
-            if(next<200000&&!check[next]){
-                check[next]=true;
-                queue.add(new int[]{next,now[1]+1});
-            }
-
-
-
-
+		System.out.println(answer);
         }
-        return -1;
     }
+
+	static int bfs(int subin, int sister) {
+		ArrayDeque<Status> que = new ArrayDeque<>();
+		que.add(new Status(0, subin));
+		boolean[] check = new boolean[sister*2+1];
+		while (!que.isEmpty()) {//큐는 앞에 넣은 값부터 검증하므로 position == sister가 되는순간이 가장 빠른시간이다.
+			Status now = que.pollFirst();
+			check[now.position]=true;
+			if (now.position == sister) {//찾자마자 return
+				return now.time;
+			}
+			
+			
+			if(now.position<=sister&&!check[now.position*2]) {
+				check[now.position*2]=true;
+				que.add(new Status(now.time + 1, now.position * 2));
+			}
+			if(now.position<sister*2-1&&!check[now.position+1]) {
+				check[now.position+1]=true;
+				que.add(new Status(now.time + 1, now.position + 1));
+			}
+			
+			if (now.position > 1&&!check[now.position-1]) {//0보다 작아질경우 xx}
+				check[now.position-1]=true;
+				que.add(new Status(now.time + 1, now.position - 1));
+				
+		
+			}
+		}
+
+		return 0;
+	}
+
+	static class Status {
+		int time;
+		int position;
+
+		public Status(int time, int position) {
+			this.time = time;
+			this.position = position;
+		}
+	}
 }
