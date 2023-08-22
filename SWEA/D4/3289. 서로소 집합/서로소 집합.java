@@ -11,6 +11,7 @@ import java.util.StringTokenizer;
  */
 public class Solution {
 	static int[] parent;
+	static int[] rank;
 	public static void main(String[] args) throws NumberFormatException, IOException {
 		BufferedReader br =new BufferedReader(new InputStreamReader(System.in));
 		int T = Integer.parseInt(br.readLine());
@@ -21,9 +22,10 @@ public class Solution {
 			int N = Integer.parseInt(st.nextToken());
 			int M = Integer.parseInt(st.nextToken());
 			parent = new int[N+1];
-			
+			rank= new int[N+1];
 			for(int idx=1;idx<N+1;idx++) {//parent배열 초기화
 				parent[idx]=idx;
+				rank[idx]=1;
 			}
 			
 			sb.append("#"+test_case+" ");
@@ -72,10 +74,12 @@ public class Solution {
 			return;
 		}
 		
-		if(A<B) {
+		if(rank[B]<rank[A]) {
 			parent[B]=A;
+			rank[A]+=rank[B];
 		}else {
 			parent[A]=B;
+			rank[B]+=rank[A];
 		}
 		
 	}
