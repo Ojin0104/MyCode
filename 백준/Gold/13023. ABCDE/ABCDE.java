@@ -40,7 +40,8 @@ public class Main {
 		for(int num=0;num<N;num++) {//모든 노드들에대해 dfs를 해준다. 만약 이미 친구관계가 존재한다면 break한다.
 			if(answer==1)break;
 			check = new boolean[N];
-			dfs(num,0);
+			check[num]=true;
+			dfs(num,1);
 		}
 		
 		System.out.println(answer);
