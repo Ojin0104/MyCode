@@ -71,18 +71,18 @@ public class Main {
 
 	static void backtracking(int index, int count, int sum) {
 		// 1~N/2 개까지만 구하면됨
-		if ((index == N+1||count==N/2)&& answer > Math.abs(2 * sum - total)) {// 각 팀이 서로 연결되는지체크
-//			for(int i=1;i<=N;i++) {
-//				if(teamA[i])System.out.print(i+" ");
-//			}
-//		System.out.println();
+		if (index == N+1 &&count<=N/2&& answer > Math.abs(2 * sum - total)) {// 각 팀이 서로 연결되는지체크
+			//for(int i=1;i<=N;i++) {
+				//if(teamA[i])System.out.print(i+" ");
+			//}
+			//System.out.println();
 			if (isPossible()) {
 				answer = Math.abs(2 * sum - total);
 			}
 			return;
 		}
 
-		if (index==N+1) 
+		if (count > N / 2 || index > N)
 			return;
 
 		teamA[index] = true;
