@@ -67,7 +67,7 @@ public class Main {
 			if(check[now.node])continue;
 			
 			check[now.node] = true;
-			shortestDist[now.node] = now.dist;
+			//shortestDist[now.node] = now.dist;
 			for (Edge next : graph[now.node]) {
 				if (check[next.node])
 					continue;
