@@ -1,91 +1,91 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.PriorityQueue;
+import java.util.StringTokenizer;
 
+/**
+ * 
+ * @author 영진 1.다잌스트라 문제 2. 한점을 기준으로 연결된 경로 가중치와 연결되지 않았아면 INF로 배열을 만든다. 3.
+ *         우선순위큐에 한점에서 다른점으로 가는 가중치를 저장해두고 가중치가 낮은 순서로 정렬한다. 4. 큐에 값이 없을떄까지 큐에서
+ *         값을빼(한점에서 해당점으로 갈수 있는 가장 낮은 가중치) 해당 노드에서 다른노드를 갈때 현재보다 빠르게 갈 수 있는지
+ *         체크한다. 5. 만약 빠르게 갈 수 있다면 우선순위 큐에 넣어준다
+ */
 public class Main {
-    static int V;
-    static int E;
-    static int startpoint;
-    static int[] shortest;
-    static boolean[] check;
-    static ArrayList<edge>[] list;
-    static PriorityQueue<point> pq=new PriorityQueue<>(new Comparator<point>() {
-        @Override
-        public int compare(point o1, point o2) {
-            return o1.b>o2.b? 1:-1;
-        }
-    });
-    public static void main(String args[]) throws IOException {
-        BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st=new StringTokenizer(br.readLine());
-        V=Integer.parseInt(st.nextToken());
-        E=Integer.parseInt(st.nextToken());
-        startpoint=Integer.parseInt(br.readLine());
-        int u,v,w;
-        list=new ArrayList[V+1];
-        shortest=new int[V+1];
-        check=new boolean[V+1];
-        for(int i=0;i<V+1;i++){
-            list[i]=new ArrayList<>();
-        }
+	static ArrayList<Edge>[] graph;
+	static int[] shortestDist;
+	static int V;
 
-        for(int i=0;i<E;i++){
-            st=new StringTokenizer(br.readLine());
-            u=Integer.parseInt(st.nextToken());
-            v=Integer.parseInt(st.nextToken());
-            w=Integer.parseInt(st.nextToken());
+	public static void main(String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		StringBuilder sb = new StringBuilder();
 
-            list[u].add(new edge(u,v,w));
-        }
+		V = Integer.parseInt(st.nextToken());
+		int E = Integer.parseInt(st.nextToken());
+		graph = new ArrayList[V + 1];
+		shortestDist = new int[V + 1];
+		for (int idx = 1; idx <= V; idx++) {
+			graph[idx] = new ArrayList<Edge>();
+		}
 
-        Arrays.fill(shortest,Integer.MAX_VALUE);
-        shortest[startpoint]=0;
-        pq.add(new point(startpoint,0));
+		int K = Integer.parseInt(br.readLine());
 
-        //startpoint에서 시작해서 우선순위큐 에서 하나씩 빼내며 반복
-        while(!pq.isEmpty()){
+		for (int idx = 0; idx < E; idx++) {// 그래프 생성
+			st = new StringTokenizer(br.readLine());
 
-            point node=pq.poll();
-            if(check[node.a]==false){
-                check[node.a]=true;
-            int start=node.a;
-            int weight=node.b;
+			int start = Integer.parseInt(st.nextToken());
+			int end = Integer.parseInt(st.nextToken());
 
-            for(int i=0;i<list[start].size();i++){
-                int end=list[start].get(i).v;
-                if(shortest[end]>weight+list[start].get(i).w) {
-                    shortest[end] = weight + list[start].get(i).w;
-                    pq.add(new point(end, shortest[end]));
-                }
-            }
+			int dist = Integer.parseInt(st.nextToken());
 
-            }
-        }
-        for(int i=1;i<=V;i++){
-            if(shortest[i]==Integer.MAX_VALUE){
-                System.out.println("INF");
-            }else{
-                System.out.println(shortest[i]);
-            }
-        }
-    }
-    static class edge{
-        int u;
-        int v;
-        int w;
-        edge(int u,int v,int w){
-            this.v=v;
-            this.u=u;
-            this.w=w;
-        }
-    }
-    static class point{
-        int a;
-        int b;
-        point(int a,int b){
-            this.a=a;
-            this.b=b;
-        }
-    }
+			graph[start].add(new Edge(end, dist));
+		}
+
+		dikstra(K);
+		for (int idx = 1; idx <= V; idx++) {
+			if (shortestDist[idx] == Integer.MAX_VALUE) {
+				sb.append("INF\n");
+			} else {
+				sb.append(shortestDist[idx] + "\n");
+			}
+		}
+		System.out.println(sb);
+	}
+
+	static void dikstra(int start) {
+		PriorityQueue<Edge> pq = new PriorityQueue<>((e1, e2) -> e1.dist - e2.dist);// 거리가까운순
+		boolean[] check = new boolean[V + 1];
+		pq.add(new Edge(start, 0));
+		Arrays.fill(shortestDist, Integer.MAX_VALUE);
+		shortestDist[start] = 0;
+
+		while (!pq.isEmpty()) {
+			Edge now = pq.poll();
+			if(check[now.node])continue;
+			
+			check[now.node] = true;
+			shortestDist[now.node] = now.dist;
+			for (Edge next : graph[now.node]) {
+				if (check[next.node])
+					continue;
+				if (shortestDist[next.node] > shortestDist[now.node] + next.dist) {
+					shortestDist[next.node] = shortestDist[now.node] + next.dist;
+					pq.add(new Edge(next.node, shortestDist[next.node]));
+				}
+			}
+		}
+	}
+
+	static class Edge {
+		int node;
+		int dist;
+
+		public Edge(int node, int dist) {
+			this.node = node;
+			this.dist = dist;
+		}
+	}
 }
