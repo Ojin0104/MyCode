@@ -2,7 +2,15 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
-
+/**
+ * 
+ * @author 영진
+ *  1. 상어클래스를 정의한다. 크기,속도,방향,현재위치,상어 배열에 몇번쨰에 위치
+ *  2. 열마다 sharkCatch , sharkMove를 반복한다.
+ *  3. sharkCatch의 경우 행이 작은 곳부터 탐색하며 가장먼저 찾은 상어 잡는다.
+ *  4. sharkMove의 경우 상어배열에서 순서대로 상어를 움직여주고 상황에따라 서로 잡아먹는 로직을 만든다.
+ *  
+ */
 public class Main {
 	static int R;
 	static int C;
@@ -21,7 +29,7 @@ public class Main {
 		C = Integer.parseInt(st.nextToken());
 		M = Integer.parseInt(st.nextToken());
 		Shark[] sharks = new Shark[M + 1];
-		int[][] map = new int[R + 1][C + 1];// index로 상어위치 표시!!
+		int[][] map = new int[R + 1][C + 1];// index로 상어위치 표시!! r,c에 index라면  그 위치에 sharks[index]상어가 존재 한다는 뜻
 		for (int index = 1; index <= M; index++) {// 상어배열에 보관
 			st = new StringTokenizer(br.readLine());
 
@@ -35,7 +43,8 @@ public class Main {
 
 		}
 
-		for (int nowCol = 1; nowCol <= C; nowCol++) {
+		for (int nowCol = 1; nowCol <= C; nowCol++) {//열하나씩 이동하면서 상어잡고 상어움직이고 반복한다.
+			
 			catchShark(sharks, map, nowCol);
 
 			sharkMove(sharks, map);
@@ -44,14 +53,25 @@ public class Main {
 		System.out.println(answer);
 
 	}
-
-	// 아직안움직인 상어와 움직인 상어 부딫힐경우 움직인 상어로 map수정 시켜줌
+	
+	static void catchShark(Shark[] sharks, int[][] map, int man) {
+		for (int row = 1; row <= R; row++) {
+			if (map[row][man] != 0) {// 상어를 잡음
+				answer += sharks[map[row][man]].size;
+				sharks[map[row][man]].deadShark();
+				map[row][man] = 0;
+				return;
+			}
+		}
+	}
+	// 아직안움직인 상어와 움직인 상어 부딫힐경우 움직인 상어로 map수정 시켜줌(안움직인상어는 다른곳으로 움직이기 떄문)
 	// 둘다 움직인 상어라면 크기 작은애 잡아 먹힘
-	// 현재 상어 탐색 인덱스보다 작으면 이미 움직인 상어이다.
+	// 현재 상어 탐색 인덱스보다 작으면 이미 움직인 상어이다.(인덱스 순으로 상어를 움직이기 떄문에)
 	static void sharkMove(Shark[] sharks, int[][] map) {
-		for (Shark shark : sharks) {
-			if (shark == null)
-				continue; // 0번쨰인덱스 스킵
+		for (int idx=1;idx<sharks.length;idx++) {
+			Shark shark=sharks[idx];
+//			if (shark == null)
+//				continue; // 0번쨰인덱스 스킵
 			if (shark.size == -1)
 				continue; // 죽은상어 스킵
 			int row = shark.row;
@@ -135,16 +155,7 @@ public class Main {
 			return dir - 1;
 	}
 
-	static void catchShark(Shark[] sharks, int[][] map, int man) {
-		for (int row = 1; row <= R; row++) {
-			if (map[row][man] != 0) {// 상어를 잡음
-				answer += sharks[map[row][man]].size;
-				sharks[map[row][man]].deadShark();
-				map[row][man] = 0;
-				return;
-			}
-		}
-	}
+	
 
 	static class Shark {// size=-1이면 죽은상어
 		int size;
@@ -168,3 +179,5 @@ public class Main {
 		}
 	}
 }
+
+
