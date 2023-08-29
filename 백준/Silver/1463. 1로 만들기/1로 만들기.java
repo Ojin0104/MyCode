@@ -1,39 +1,34 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.LinkedList;
-import java.util.Queue;
 
+/**
+ * 
+ * @author 영진
+ * 1.dp[i]  정수 N이 i가 되었을때 최솟값 
+ *
+ */
 public class Main {
-
-    public static void main(String[] args) throws IOException {
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-        int N=Integer.parseInt(bufferedReader.readLine());
-
-        int answer=bfs(N,0);
-        System.out.println(answer);
-    }
-
-    static int bfs(int num,int count){
-        Queue<int[]> queue = new LinkedList<>();
-        queue.add(new int[]{num,count});
-
-        while(!queue.isEmpty()){
-            int[] now=queue.poll();
-            if(now[0]==1){
-                return now[1];
-            }
-            if(now[0]%3==0){
-                queue.add(new int[]{now[0]/3,now[1]+1});
-
-            }
-
-            if(now[0]%2==0){
-                queue.add(new int[]{now[0]/2,now[1]+1});
-
-            }
-            queue.add(new int[]{now[0]-1,now[1]+1});
-        }
-        return -1;
-    }
+	
+	public static void main(String[] args) throws NumberFormatException, IOException {
+		BufferedReader br =new BufferedReader(new InputStreamReader(System.in));
+		int N = Integer.parseInt(br.readLine());
+		int[] dp = new int[N+1];
+		//dp[N]=1;
+		for(int idx=N-1;idx>=1;idx--) {
+			dp[idx]=Integer.MAX_VALUE;
+			if(idx*2<=N) {//인덱스 범위 체크
+				dp[idx]=dp[idx*2]+1;
+			}
+			
+			if(idx*3<=N) {//인덱스 범위 체크
+				dp[idx]=Math.min(dp[idx*3]+1, dp[idx]);
+			}
+			
+			dp[idx]=Math.min(dp[idx], dp[idx+1]+1);
+		}
+		
+		System.out.println(dp[1]);
+	}
+	
 }
