@@ -1,115 +1,85 @@
 import java.util.*;
 
-//linkedlist로 구현 하고 삭제한 위치의 노드 양 옆 가지고 있기
 class Solution {
     public String solution(int n, int k, String[] cmd) {
-        LinkedList linked = new LinkedList();
-        //연결리스트 만들기
-        for(int i=0;i<n;i++){
-            linked.addLast(new Node(i));
-        }
+        Node cur = initList(n);
         Stack<Node> stack = new Stack<>();
-        Node now = linked.head.next;
-        for(int i=0;i<k;i++){
-            now= now.next;
+        for (int i = 0; i < k; i++) {
+            cur = cur.next;
         }
-        int time=0;
-        for(String str : cmd){
-            time++;
-            String[] strs = str.split(" ");
-            if(strs[0].equals("U")){
-                
-                now= beforeNode(now,Integer.parseInt(strs[1]));
-            }else if(strs[0].equals("D")){
-               
-                 now= nextNode(now,Integer.parseInt(strs[1]));
-          
-            }else if(strs[0].equals("C")){
-                stack.add(now);
-                linked.delete(now);
-                if(now.next==null){
-                    now=now.before;
-                }else{
-                    now=now.next;
-                }
-            }else{//복구
-                Node reload = stack.pop();
-                
-                reload.before.next=reload;
-                if(reload.next!=null)
-                    reload.next.before= reload;
+
+        for (String s : cmd) {
+            char command = s.charAt(0);
+            int distance;
+            switch (command) {
+                case 'U':
+                    distance = getDistance(s);
+                    for (int i = 0; i < distance; i++) {
+                        cur = cur.prev;
+                    }
+                    break;
+                case 'D':
+                    distance = getDistance(s);
+                    for (int i = 0; i < distance; i++) {
+                        cur = cur.next;
+                    }
+                    break;
+                case 'C':
+                    stack.add(cur);
+                    cur.remove();
+                    cur = cur.hasNext() ? cur.next : cur.prev;
+                    break;
+                case 'Z':
+                    stack.pop().restore();
+                    break;
             }
-           
         }
-        Node node= linked.head.next;
-        StringBuilder sb =new StringBuilder();
-        int point = 0;
-        for(int i=0;i<n;i++){
-            if(node!=null&&node.status==i){
-                sb.append("O");
-                node=node.next;
-            }else{
-                sb.append("X");
-            }
-            
-        
+
+        StringBuilder answer = new StringBuilder("O".repeat(n));
+        while (!stack.isEmpty()) {
+            answer.setCharAt(stack.pop().idx, 'X');
         }
-        
-        return sb.toString();
+        return answer.toString();
     }
-    static Node nextNode(Node node,int times){
-        for(int i=0;i<times;i++){
-            node= node.next;
-        }
-        
-        return node;
+
+    private int getDistance(String s) {
+        return Integer.parseInt(s.substring(2));
     }
-    
-    
-    static Node beforeNode(Node node,int times){
-        for(int i=0;i<times;i++){
-            node= node.before;
+
+    private static class Node {
+        int idx;
+        Node prev, next;
+
+        public Node(int idx) {
+            this.idx = idx;
         }
-        
-        return node;
-    }
-    
-    class LinkedList{
-        Node head;
-        Node tail;
-        int num;
-        public LinkedList(){
-            head= new Node(-1);
-            tail= head;
-            num=0;
+
+        boolean hasNext() {
+            return next.idx != -1;
         }
-        
-        public void addLast(Node node){
-            tail.next = node;
-            node.before =tail;
-            tail= node;
-            node.status=num;
-            num++;
+
+        public void restore() {
+            prev.next = this;
+            next.prev = this;
         }
-        public void delete(Node node){
-            if(node.next!=null){
-                Node next = node.next;
-                next.before=node.before;
-                node.before.next=next;
-            }else{
-                node.before.next=null;
-            }
-            
+
+        public void remove() {
+            prev.next = next;
+            next.prev = prev;
         }
     }
-    
-    class Node{
-        Node before;
-        int status; //0은 head 1은 body
-        Node next;
-        
-        public Node(int status){
-            this.status= status;
+
+    private Node initList(int n) {
+        Node start = new Node(-1);
+        Node prev = start;
+        Node cur = null;
+        for (int i = 0; i < n; i++) {
+            cur = new Node(i);
+            prev.next = cur;
+            cur.prev = prev;
+            prev = cur;
         }
+        cur.next = new Node(-1); //end노드 설정
+        return start.next; //첫번째 노드 반환
     }
 }
