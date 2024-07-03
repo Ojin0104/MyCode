@@ -1,8 +1,5 @@
 import java.util.*;
 class Solution {
-
-    //뒤에 남은게 있으면 뒤에걸 없애고 뒤에 남은게 없으면 앞에 것의 권리를 박탈시킴
-    boolean flag = true;
     public String predictPartyVictory(String senate) {
         Queue<Character> que = new LinkedList<>();
         int radiant = 0;
@@ -45,9 +42,4 @@ class Solution {
         }
         return "Dire";
     }
-
-    
-
-    
-    
 }
