@@ -23,7 +23,6 @@ class Solution {
                 right= mid -1;
             }
         }
-       // System.out.println(right);
-        return right+1;
+        return left;
     }
 }
