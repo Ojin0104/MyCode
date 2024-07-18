@@ -1,29 +1,20 @@
 class Solution {
     public int[] dailyTemperatures(int[] temperatures) {
         int[] answer = new int[temperatures.length];
-        int now = 0;
-        PriorityQueue<Status> pq = new PriorityQueue<>((o1,o2)->o1.num-o2.num);
+        
+        ArrayDeque<Integer> stack = new ArrayDeque<>();
+
         for(int idx = 0 ;idx<temperatures.length;idx++){
             int temperature= temperatures[idx];
-            while(!pq.isEmpty()&&pq.peek().num<temperature){
-                Status status = pq.poll();
-                answer[status.idx] = idx-status.idx;
+
+            while(!stack.isEmpty()&&temperatures[stack.peek()]<temperature){
+                answer[stack.peek()] = idx-stack.pop();
             }
-
-            pq.add(new Status(idx,temperature));
-
+            stack.push(idx);
         }
 
         return answer;
     }
 
-    class Status{
-        int idx;
-        int num;
 
-        public Status(int idx, int num){
-            this.idx = idx;
-            this.num = num;
-        }
-    }
 }
