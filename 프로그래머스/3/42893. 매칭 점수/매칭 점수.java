@@ -18,7 +18,6 @@ class Solution {
             List<String> hrefs = findHref(page);
             
             int linkCount = hrefs.size();
-            System.out.println(linkCount);
             realPages.add(url);
             Page nowPage = new Page(url,point,linkCount);
             pageMap.put(url,nowPage);
@@ -29,14 +28,11 @@ class Solution {
             List<String> hrefs = findHref(pages[idx]);
             
             Page page =  pageMap.get(realPages.get(idx));
-            System.out.println("now "+page.url);
             
             if(hrefs.size()==0)continue;
             Double linkScore = (Double)page.score/page.link;
             for(String href : hrefs){
-                
                 if(!pageMap.containsKey(href))continue;
-                System.out.println("href "+href);
                 pageMap.get(href).pluslinkScore(linkScore);
             }
             
@@ -46,7 +42,6 @@ class Solution {
          int maxIdx = -1;
         for(int idx =0 ;idx<pages.length;idx++){
             String url = realPages.get(idx);
-            System.out.println(pageMap.get(url).score+pageMap.get(url).linkScore);
             if(pageMap.get(url).score+pageMap.get(url).linkScore>max){
                 max = pageMap.get(url).score+pageMap.get(url).linkScore;
                 maxIdx = idx;
@@ -57,7 +52,7 @@ class Solution {
     }
     
     public List<String> findHref(String page){
-         String regex = "<a href=\"(?<link>[^\"]*)\"";
+         String regex = "<a\\s+href=\"(https?://[^\"]*)\"";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(page);
         
@@ -83,7 +78,7 @@ class Solution {
         return (double)answer ;
     }
     public String findNowPage(String page){
-        String regex = "<head>[\\s\\S]*<meta[^>]*content=\"(?<url>[^\"]*)\"";
+        String regex = "<meta\\s+[^>]*?(https://[^\"]*)";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(page);
         if(matcher.find()){
