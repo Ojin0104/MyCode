@@ -23,9 +23,9 @@ class Solution {
         }
 
         for(int row=0; row<board.length;row++){
-            for(int col = 0; col<board[0].length;col++){
-                board[row][col] = newBoard[row][col];
-            }
+            
+                board[row] = newBoard[row].clone();
+            
         }
     }
 
