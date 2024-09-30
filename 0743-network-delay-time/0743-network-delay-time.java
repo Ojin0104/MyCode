@@ -2,7 +2,6 @@ import java.util.*;
 class Solution {
     public int networkDelayTime(int[][] times, int n, int k) {
         List<List<Edge>> edges = new ArrayList<>();
-        boolean[] visit = new boolean[n+1];
         int[] dist = new int[n+1];
         for(int idx =0; idx<n+1; idx++){
             edges.add(new ArrayList<Edge>());
@@ -25,12 +24,8 @@ class Solution {
         while(!que.isEmpty()){
             Node node = que.poll();
             int now = node.num;
-            if(visit[now])continue;
-
-            visit[now] = true;
-
+            if(node.dist >dist[now])continue;
             for(Edge next : edges.get(now)){
-                int n_start = next.s;
                 int n_end = next.e;
                 int n_cost = next.cost;
 
