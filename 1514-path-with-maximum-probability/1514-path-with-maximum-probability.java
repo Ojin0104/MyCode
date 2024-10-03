@@ -19,7 +19,7 @@ class Solution {
             edgeList.get(end).add(new Edge(start,cost));
         }
         
-        PriorityQueue<Edge> pq = new PriorityQueue<Edge>((o1,o2)->(int)(o2.cost*100000- o1.cost*100000));
+        PriorityQueue<Edge> pq = new PriorityQueue<Edge>((o1,o2)->{ if(o2.cost-o1.cost >0) return 1; else if(o2.cost-o1.cost<0)return -1; else return 0;});
         pq.add(new Edge(start_node,1.0));
         dist[start_node] = 1.0;
         while(!pq.isEmpty()){
