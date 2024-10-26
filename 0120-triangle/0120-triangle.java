@@ -14,7 +14,6 @@ class Solution {
                 dp[row+1][col]= Math.min(dp[row+1][col],dp[row][col]+triangle.get(row+1).get(col));
                 dp[row+1][col+1]= Math.min(dp[row+1][col+1],dp[row][col]+triangle.get(row+1).get(col+1));
                 col++;
-                System.out.println(dp[row+1][col]);
             }
         }
         int answer = Integer.MAX_VALUE;
