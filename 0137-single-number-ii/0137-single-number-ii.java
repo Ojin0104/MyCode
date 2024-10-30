@@ -1,17 +1,13 @@
 class Solution {
-    public int singleNumber(int[] nums) {
-       Map<Integer,Integer> map = new HashMap<>();
+     public int singleNumber(int[] nums) {
+    int ones = 0;
+    int twos = 0;
 
-
-        for(int num:nums){
-            map.put(num,map.getOrDefault(num,0)+1);
-        }
-
-        for(Integer idx: map.keySet()){
-            if(map.get(idx)==1)return idx;
-        }
-        
-
-        return -1;
+    for (final int num : nums) {
+      ones ^= (num & ~twos);
+      twos ^= (num & ~ones);
     }
+
+    return ones;
+  }
 }
