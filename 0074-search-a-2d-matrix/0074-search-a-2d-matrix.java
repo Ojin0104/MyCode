@@ -3,7 +3,6 @@ class Solution {
     public boolean searchMatrix(int[][] matrix, int target) {
         r= matrix[0].length;
 
-
         return binSearch(matrix, target);
     }
 
@@ -26,7 +25,7 @@ class Solution {
 
         return false;
     }
-    
+
     static int[] idxToPoint(int num){
         int[] answer = new int[2];
 
