@@ -7,6 +7,7 @@ class Solution {
             
             for(int wordIdx = 0 ;wordIdx<wordDict.size(); wordIdx++){
                 String word = wordDict.get(wordIdx);
+                if(dp[idx])break;
                 if(idx<word.length())continue;
 
 
