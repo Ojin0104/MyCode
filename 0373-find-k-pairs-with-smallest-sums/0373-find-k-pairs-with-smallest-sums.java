@@ -2,15 +2,8 @@ class Solution {
     public List<List<Integer>> kSmallestPairs(int[] nums1, int[] nums2, int k) {
         List<List<Integer>> answer  =new ArrayList<>();
         int[] index = new int[nums1.length];
-        PriorityQueue<Node> pq = new PriorityQueue<>((o1,o2)-> {
-
-            if(o1.sum >o2.sum){
-                return 1;
-            
-            }else{
-                return -1;
-            }
-        });
+        PriorityQueue<Node> pq = new PriorityQueue<>((o1,o2)-> o1.sum-o2.sum);
+      
             
         for(int idx = 0; idx< nums1.length; idx++){
             pq.add(new Node(nums1[idx]+nums2[0],idx));
