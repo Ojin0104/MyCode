@@ -6,12 +6,7 @@ class Solution {
 
             if(o1.sum >o2.sum){
                 return 1;
-            }else if(o1.sum == o2.sum){
-                if(o1.idx>o2.idx){
-                    return 1;
-                }else{
-                    return -1;
-                }
+            
             }else{
                 return -1;
             }
