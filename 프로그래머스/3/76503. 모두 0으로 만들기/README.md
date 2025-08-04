@@ -1,6 +1,6 @@
 # [level 3] 모두 0으로 만들기 - 76503 
 
-[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/76503) 
+[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/76503?language=java) 
 
 ### 성능 요약
 
@@ -16,7 +16,7 @@
 
 ### 제출 일자
 
-2025년 08월 04일 21:01:04
+2025년 08월 04일 21:01:56
 
 ### 문제 설명
 
