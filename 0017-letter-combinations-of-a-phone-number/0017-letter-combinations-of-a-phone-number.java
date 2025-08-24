@@ -1,31 +1,35 @@
 class Solution {
+    private static final List<String>[] CHAR_LIST = new List[10];
+    
+    static {
+        CHAR_LIST[0] = Arrays.asList();
+        CHAR_LIST[1] = Arrays.asList();
+        CHAR_LIST[2] = Arrays.asList("a", "b", "c");
+        CHAR_LIST[3] = Arrays.asList("d", "e", "f");
+        CHAR_LIST[4] = Arrays.asList("g", "h", "i");
+        CHAR_LIST[5] = Arrays.asList("j", "k", "l");
+        CHAR_LIST[6] = Arrays.asList("m", "n", "o");
+        CHAR_LIST[7] = Arrays.asList("p", "q", "r","s");
+        CHAR_LIST[8] = Arrays.asList("t", "u", "v");
+        CHAR_LIST[9] = Arrays.asList("w", "x", "y", "z");
+    }
+    
     public List<String> letterCombinations(String digits) {
-        String[] str = {"","","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
+        
         List<String> answer = new ArrayList<>();
-        List<String> lst = new ArrayList<String>();
-        for(int idx = 0 ;idx<digits.length();idx++){
-            char choice = digits.charAt(idx);
-            if(idx==0){
-                for(int i = 0 ;i<str[choice-'0'].length();i++){
-                    char ch = str[choice-'0'].charAt(i);
-                    lst.add(ch+"");
-                }
-                    continue;
-                }
-            answer = lst;
-            lst = new ArrayList<String>();
-            
-            for(String s: answer){
-                for(int i = 0 ;i<str[choice-'0'].length();i++){
-                    char ch = str[choice-'0'].charAt(i);
-                    lst.add(s+ch);
-                }
-            }
+        if(digits.isBlank())return answer;
+        backtracking(digits,0, answer, "");
+        return answer;
+    }
 
+    public void backtracking(String digits,int idx, List<String> answer, String str){
+        if(idx == digits.length()){
+            answer.add(str);
+            return;
         }
-
-        return lst;
-
-
+        int num = digits.charAt(idx) - '0';
+        for(String character: CHAR_LIST[num]){
+            backtracking(digits,idx+1,answer, str+character);
+        }
     }
 }
