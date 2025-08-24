@@ -44,6 +44,7 @@ class Solution {
                 
             }
         }
+        if(answerArray.size()<numCourses)return new int[0];
         int[] answer = answerArray.stream().mapToInt(Integer::intValue).toArray();
         return answer;
     }
