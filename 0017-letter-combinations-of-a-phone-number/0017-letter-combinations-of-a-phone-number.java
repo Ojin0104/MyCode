@@ -18,18 +18,19 @@ class Solution {
         
         List<String> answer = new ArrayList<>();
         if(digits.isBlank())return answer;
-        backtracking(digits,0, answer, "");
+        backtracking(digits,0, answer, new StringBuilder());
         return answer;
     }
 
-    public void backtracking(String digits,int idx, List<String> answer, String str){
+    public void backtracking(String digits,int idx, List<String> answer, StringBuilder str){
         if(idx == digits.length()){
-            answer.add(str);
+            answer.add(str.toString());
             return;
         }
         int num = digits.charAt(idx) - '0';
         for(String character: CHAR_LIST[num]){
-            backtracking(digits,idx+1,answer, str+character);
+            backtracking(digits,idx+1,answer, str.append(character));
+            str.deleteCharAt(str.length()-1);
         }
     }
 }
