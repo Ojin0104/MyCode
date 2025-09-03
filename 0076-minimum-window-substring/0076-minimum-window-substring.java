@@ -14,7 +14,8 @@ class Solution {
         int minLength = s.length()+1;
 
         int left =0;
-
+        int start = 0;
+        int end = -1;
         for(int right =0 ;right<s.length(); right++){
             
             Character now = s.charAt(right);
@@ -29,7 +30,9 @@ class Solution {
             
             if(count == num && minLength>right-left+1){
                 minLength = right-left+1;
-                answer = s.substring(left,right+1);
+                
+                start = left;
+                end = right;
             }
             //left 당기기
             while(count == num){
@@ -44,10 +47,12 @@ class Solution {
 
                 if(count == num && minLength>right-left+1){
                 minLength = right-left+1;
-                answer = s.substring(left,right+1);
+                start = left;
+                end = right;
             }
             }
         }
+        answer = s.substring(start,end+1);
         
         return answer;
     }
