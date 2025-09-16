@@ -29,7 +29,7 @@ class Solution {
             int mid = (left+right)/2;
             int midNum = list.get(mid);
             if(num <=midNum){
-                right = mid-1;
+                right = mid;
             }else{
                 left = mid+1;
             }
