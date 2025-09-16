@@ -22,13 +22,13 @@ class Solution {
 
     public int findNum(List<Integer> list, int num){
         int left = 0;
-        int right =list.size();
+        int right =list.size()-1;
 
-        while(left<right){
+        while(left<=right){
             int mid = (left+right)/2;
             int midNum = list.get(mid);
             if(num <=midNum){
-                right = mid;
+                right = mid-1;
             }else{
                 left = mid+1;
             }
