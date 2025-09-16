@@ -9,7 +9,6 @@ class Solution {
 
         for(int idx =1; idx<nums.length ;idx++){
             int target = findNum(list,nums[idx]);
-            System.out.println(target);
             if(target>=list.size()){
                 list.add(nums[idx]);
             }else{
