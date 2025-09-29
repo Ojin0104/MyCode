@@ -4,61 +4,61 @@
 */
 
 class Solution {
-    static int count = 0;
-    static int money = 0;
+    int plus = 0;
+    int total = 0;
     public int[] solution(int[][] users, int[] emoticons) {
-        int[] answer = new int[2];
-        int[] status = new int[users.length];
-        dfs(users,emoticons,0, status);
-        answer[0]=count;
-        answer[1]=money;
-            
+        int[] count = new int[users.length];
+        backtracking(users,emoticons,0,count);
+        
+        int[] answer = {plus,total};
         return answer;
     }
     
-    static void dfs(int[][] users, int[] emoticons, int index,int[] status){
-        if(index>=emoticons.length){
-            //이모티콘 서비스 가입하는지 확인 
-            int now_count=0;
-            int now_money=0;
-            for(int num = 0;num<users.length;num++){
-               // System.out.println(status[0]+" "+status[1]);
-                if(status[num]>=users[num][1])
-                    now_count++;
-                else{
-                    now_money+=status[num];
+    public void backtracking(int[][] users, int[] emoticons, int idx, int[] count){
+        if(idx>=emoticons.length){
+            int nowPlus = 0;
+            int nowTotal= 0;
+            for(int userIdx = 0 ;userIdx<users.length; userIdx++){
+                int[] user = users[userIdx];
+                
+                if(user[1]<= count[userIdx]){
+                    nowPlus++;
+                }else{
+                    nowTotal+=count[userIdx];
                 }
             }
             
-            if(now_count>count){
-                count=now_count;
-                money=now_money;
-            }else if(now_count==count){
-                money=Math.max(money,now_money);
+            if(nowPlus>plus){
+                plus = nowPlus;
+                total = nowTotal;
+            }else if(nowPlus == plus){
+                total = Math.max(total, nowTotal);
             }
             return;
-            
         }
         
-        for(int rate=10;rate<=40;rate+=10){
-            int price= emoticons[index]*(100-rate)/100;
-            for(int num = 0;num<users.length;num++){
-                if(users[num][0]<=rate){
-                    status[num]+=price;
+        for(int discount = 10 ; discount<=40; discount+=10){
+            int price = emoticons[idx]*(100-discount)/100;
+            for(int userIdx = 0 ; userIdx<users.length; userIdx++){
+                int[] user = users[userIdx];
+                
+                if(user[0]<=discount){
+                    count[userIdx]+= price;
                 }
             }
             
-            dfs(users,emoticons,index+1,status);
-            
-            for(int num = 0;num<users.length;num++){
-                if(users[num][0]<=rate)
-                    status[num]-=price;
+            backtracking(users,emoticons,idx+1,count);
+            for(int userIdx = 0 ; userIdx<users.length; userIdx++){
+                int[] user = users[userIdx];
+                
+                if(user[0]<=discount){
+                    count[userIdx]-= price;
+                }
             }
             
             
             
         }
-        
-        
     }
+    
 }
