@@ -1,78 +1,67 @@
+import java.util.*;
 class Solution {
-    static int maxDiff = 0;
- 
-    static int[] answer =new int[11];
-    
-    //딱한발 더 맞추거나 아예 안맞추거나
-    //가장 낮은 점수를 더 많이 맞힌 경우 
+    static int max = 1; 
+    static int[] ans = new int[11];
     public int[] solution(int n, int[] info) {
-        answer[10] = 10;
-        int[] lion = new int[11];
+        //화살 0 or 어피치 보다 1 많게
+        //남은 화살은 마지막에
+        int[] answer = new int[11];
         
-        dfs(lion,info,0,n);
-        if(maxDiff==0){
-            return new int[]{-1};
-        }
-        return answer;
+        dfs(answer,info , n,0);
+        if(Arrays.stream(ans).sum()==0) return new int[]{-1};
+        return ans;
     }
     
-    public void dfs(int[] lion,int[] peach,int idx, int arrow){
-        
-        if(idx>=11){
-            int diff = calcScore(lion,peach);
-            lion[10]+=arrow;
-            if(diff > maxDiff||(diff==maxDiff&&checkCondition(lion))){
-                maxDiff = diff;
-                changeArr(lion);
-            }
+    void dfs(int[] answer, int[] info, int n, int point){
+        if(point ==11){
+            answer[10]+=n;
             
+            int sum = countPoint(answer,info);
+            
+            if(sum>max || (sum==max&& checkCondition(answer))){
+                max = sum;
+                for(int idx=0;idx<11;idx++){
+                    ans[idx] = answer[idx];
+                }
+            }
             return;
         }
         
-        //라이언이 이기는 경우
-        if(arrow>peach[idx]){
-            lion[idx] = peach[idx]+1;
-            dfs(lion,peach,idx+1,arrow-lion[idx]);
+        if(info[point]<n){
+            answer[point] = info[point]+1;
+            dfs(answer,info,n-answer[point],point+1);
         }
         
-        //초기화
-        
-        lion[idx] = 0;
-        
-        //피치가 이기는 경우
-        dfs(lion,peach,idx+1,arrow);
+        answer[point] = 0;
+        dfs(answer,info,n,point+1);
     }
     
-    void changeArr(int[] lion){
-        for(int idx=0;idx<11;idx++){
-            answer[idx] = lion[idx];
+    public int countPoint(int[] arr1, int[] arr2){
+        int sum = 0 ;
+        for(int idx =0 ; idx<arr1.length; idx++){
+            if(arr1[idx]>arr2[idx]){
+                sum+=10-idx;
+            }else{
+                if(arr2[idx]!=0)
+                    sum-=10-idx;
+            }
         }
+        
+        return sum;
     }
     
     boolean checkCondition(int[] lion){
         for(int idx=10; idx>=0;idx--){
-            if(lion[idx]>answer[idx]){
+            if(lion[idx]>ans[idx]){
                 return true;
-            }else if(lion[idx]<answer[idx]){
+            }else if(lion[idx]<ans[idx]){
                 return false;
             }
         }
-        
+
         return false;
-        
+
     }
-  
     
-    int calcScore(int[] lion,int[] peach){
-        int diff = 0;
-        for(int idx = 0; idx < 11 ; idx++){
-            if(lion[idx]>peach[idx]){
-                diff+=(10-idx);
-            }else{
-                if(peach[idx]!=0)
-                    diff+=(idx-10);
-            }
-        }
-        return diff;
-    }
+   
 }
