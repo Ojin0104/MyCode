@@ -7,8 +7,17 @@
 | Problem Name | Difficulty |
 | ------- | ------- |
 | [0034-find-first-and-last-position-of-element-in-sorted-array](https://github.com/Ojin0104/MyCode/tree/main/0034-find-first-and-last-position-of-element-in-sorted-array/) | Medium |
+| [0221-maximal-square](https://github.com/Ojin0104/MyCode/tree/main/0221-maximal-square/) | Medium |
 ## Binary Search
 | Problem Name | Difficulty |
 | ------- | ------- |
 | [0034-find-first-and-last-position-of-element-in-sorted-array](https://github.com/Ojin0104/MyCode/tree/main/0034-find-first-and-last-position-of-element-in-sorted-array/) | Medium |
+## Dynamic Programming
+| Problem Name | Difficulty |
+| ------- | ------- |
+| [0221-maximal-square](https://github.com/Ojin0104/MyCode/tree/main/0221-maximal-square/) | Medium |
+## Matrix
+| Problem Name | Difficulty |
+| ------- | ------- |
+| [0221-maximal-square](https://github.com/Ojin0104/MyCode/tree/main/0221-maximal-square/) | Medium |
 <!---LeetCode Topics End-->
