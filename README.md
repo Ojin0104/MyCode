@@ -20,4 +20,16 @@
 | Problem Name | Difficulty |
 | ------- | ------- |
 | [0221-maximal-square](https://github.com/Ojin0104/MyCode/tree/main/0221-maximal-square/) | Medium |
+## Hash Table
+| Problem Name | Difficulty |
+| ------- | ------- |
+| [0017-letter-combinations-of-a-phone-number](https://github.com/Ojin0104/MyCode/tree/main/0017-letter-combinations-of-a-phone-number/) | Medium |
+## String
+| Problem Name | Difficulty |
+| ------- | ------- |
+| [0017-letter-combinations-of-a-phone-number](https://github.com/Ojin0104/MyCode/tree/main/0017-letter-combinations-of-a-phone-number/) | Medium |
+## Backtracking
+| Problem Name | Difficulty |
+| ------- | ------- |
+| [0017-letter-combinations-of-a-phone-number](https://github.com/Ojin0104/MyCode/tree/main/0017-letter-combinations-of-a-phone-number/) | Medium |
 <!---LeetCode Topics End-->
